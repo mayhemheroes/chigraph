@@ -1,0 +1,8 @@
+project: chigraph
+target: chigraph
+
+cmds:
+  - cmd: /repo/build/bin/chi compile /test.chimod
+    filepath: /test.chimod
+    env:
+      DISABLE_SMOKETEST: '1'
