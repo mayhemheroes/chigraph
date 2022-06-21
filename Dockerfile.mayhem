@@ -1,12 +1,7 @@
 FROM --platform=linux/amd64 ubuntu:22.04 as builder
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim less file locate 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential cmake
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ninja-build
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y llvm-12-dev
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libssl-dev clang-12               
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libboost-dev
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y liblldb-12-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential cmake ninja-build llvm-12-dev libssl-dev clang-12               libboost-dev liblldb-12-dev
 COPY . /repo
 WORKDIR /repo/build
 ENV LLVM_VERSION=12
@@ -17,9 +12,3 @@ RUN ./chi init
 
 RUN mkdir -p /deps
 RUN ldd /repo/build/bin/chi | tr -s '[:blank:]' '\n' | grep '^/' | xargs -I % sh -c 'cp % /deps;'
-
-FROM ubuntu:22.04 as package
-
-COPY --from=builder /deps /deps
-COPY --from=builder /repo/build/bin/chi /repo/build/bin/chi
-ENV LD_LIBRARY_PATH=/deps
