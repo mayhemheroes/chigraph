@@ -1,5 +1,5 @@
 project: chigraph
-target: chigraph
+target: chi
 
 cmds:
   - cmd: /repo/build/bin/chi compile /test.chimod
