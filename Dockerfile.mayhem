@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:22.04
+FROM --platform=linux/amd64 ubuntu:22.04 as builder
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim less file locate 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential cmake
@@ -14,3 +14,12 @@ RUN cmake .. -DCMAKE_CXX_COMPILER=clang++-12     -DCMAKE_C_COMPILER=clang-12    
 RUN ninja
 WORKDIR /repo/build/bin
 RUN ./chi init
+
+RUN mkdir -p /deps
+RUN ldd /repo/build/bin/chi | tr -s '[:blank:]' '\n' | grep '^/' | xargs -I % sh -c 'cp % /deps;'
+
+FROM ubuntu:22.04 as package
+
+COPY --from=builder /deps /deps
+COPY --from=builder /repo/build/bin/chi /repo/build/bin/chi
+ENV LD_LIBRARY_PATH=/deps
