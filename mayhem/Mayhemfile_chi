@@ -6,4 +6,3 @@ cmds:
     filepath: /test.chimod
     env:
       DISABLE_SMOKETEST: '1'
-image: ghcr.io/rnshah9/playground:chigraph
