@@ -1,0 +1,10 @@
+project: chigraph
+target: chi
+
+cmds:
+  - cmd: /repo/build/bin/chi compile test
+    filepath: /repo/build/bin/test/test.json
+    env:
+      DISABLE_SMOKETEST: '1'
+    max_length: 500
+image: ghcr.io/rnshah9/playground:chigraph

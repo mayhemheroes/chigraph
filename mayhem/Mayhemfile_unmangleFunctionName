@@ -1,0 +1,7 @@
+project: chigraph
+target: unmanglefunctionname
+
+cmds:
+  - cmd: /fuzz_unmangleFunctionName
+    libfuzzer: true
+image: ghcr.io/rnshah9/playground:chigraph
