@@ -6,3 +6,4 @@ cmds:
     filepath: /test.chimod
     env:
       DISABLE_SMOKETEST: '1'
+# mayhem-lint: keep-filepath -- chi compile computes <arg>.chimod; needs the fixed module path
