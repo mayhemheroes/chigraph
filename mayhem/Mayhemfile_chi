@@ -1,0 +1,10 @@
+project: chigraph
+target: chi
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/chi/testsuite
+
+cmds:
+  - cmd: /mayhem/fuzz_chi
+    libfuzzer: true

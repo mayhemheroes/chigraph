@@ -1,0 +1,9 @@
+# Parity placeholder: the archived integration (archive/original-master) shipped an empty
+# mayhem/Mayhemfile alongside the real per-target files, so the port keeps one here too.
+# It is NOT dispatched by CI (the workflow matrix lists only Mayhemfile_chi and
+# Mayhemfile_unmangleFunctionName); it deliberately carries no `target:` of its own.
+project: chigraph
+
+cmds:
+  - cmd: /mayhem/fuzz_chi
+    libfuzzer: true
